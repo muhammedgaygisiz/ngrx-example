@@ -14,6 +14,6 @@ import { NgForOf } from "@angular/common";
 export class ProductListComponent {
 
   @Input()
-  products: Product[] = [];
+  products: Product[] | null = [];
 
 }

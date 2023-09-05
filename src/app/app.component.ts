@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ProductListComponent } from "./libs/product-list/product-list.component";
 import { ShoppingListComponent } from "./libs/shopping-list/shopping-list.component";
 import { ShoppingListItem } from "./libs/shopping-list/shopping-list.item";
+import { AsyncPipe } from "@angular/common";
+import { ShoppingListStoreService } from "./libs/store/shopping-list-store.service";
 
 @Component({
   selector: 'app-root',
@@ -9,11 +11,14 @@ import { ShoppingListItem } from "./libs/shopping-list/shopping-list.item";
   imports: [
     ProductListComponent,
     ShoppingListComponent,
+    AsyncPipe,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  service = inject(ShoppingListStoreService);
 
   shoppingList: ShoppingListItem[] = [];
 }

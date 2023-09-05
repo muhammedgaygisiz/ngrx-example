@@ -4,7 +4,7 @@
   <div class="products">
     <h2>Products</h2>
 
-    <app-product-list [products]="[]" />
+    <app-product-list [products]="service.product$ | async" />
   </div>
 
   <div class="shopping-list">
