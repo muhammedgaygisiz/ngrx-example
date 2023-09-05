@@ -1,4 +1,4 @@
-import { createAction, createFeatureSelector, createSelector, props } from "@ngrx/store";
+import { createAction, createFeatureSelector, createReducer, createSelector, on, props } from "@ngrx/store";
 import { ShoppingListItem } from "../shopping-list/shopping-list.item";
 import { Product } from "../product-list/product";
 
@@ -12,4 +12,24 @@ export const shoppingList = createSelector(
 export const addToShoppingListAction = createAction(
   '[Shopping List] Add item',
   props<{ product: Product }>()
+);
+
+const INITIAL_SHOPPING_LIST: ShoppingListItem[] = [];
+
+export const shoppingListReducers = createReducer(
+  INITIAL_SHOPPING_LIST,
+  on(
+    addToShoppingListAction,
+    (state, action) => {
+      const product = action.product;
+
+      return [
+        ...state,
+        {
+          name: product.name,
+          amount: 1
+        }
+      ];
+    }
+  )
 );
