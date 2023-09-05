@@ -1,9 +1,19 @@
-import { Injectable } from "@angular/core";
-import { of } from "rxjs";
+import { inject, Injectable } from "@angular/core";
+import { createFeatureSelector, createSelector, Store } from "@ngrx/store";
+import { Product } from "../product-list/product";
+
+const productsSlice = createFeatureSelector<Product[]>('products');
+
+const products = createSelector(
+  productsSlice,
+  (products) => products
+);
 
 @Injectable({
   providedIn: "root"
 })
 export class ShoppingListStoreService {
-  product$ = of([{id: 1, name: 'Apple'}]);
+  store = inject(Store);
+
+  product$ = this.store.select(products);
 }
