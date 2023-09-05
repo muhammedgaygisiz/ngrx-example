@@ -1,0 +1,22 @@
+<div class="content">
+  <ng-container *ngIf="shoppingList.length; else emptyShoppingList">
+    <table>
+      <thead>
+      <tr>
+        <th>Product</th>
+        <th>Menge</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of shoppingList">
+        <td>{{item.name}}</td>
+        <td>{{item.amount}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </ng-container>
+</div>
+
+<ng-template #emptyShoppingList>
+  Your Shopping List is empty :(
+</ng-template>
