@@ -15,6 +15,6 @@ import { NgForOf, NgIf } from "@angular/common";
 export class ShoppingListComponent {
 
   @Input()
-  shoppingList: ShoppingListItem[] = [];
+  shoppingList: ShoppingListItem[] | null = [];
 
 }
