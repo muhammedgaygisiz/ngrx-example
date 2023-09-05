@@ -6,7 +6,16 @@ const shoppingListSlice = createFeatureSelector<ShoppingListItem[]>('shopping-li
 
 export const shoppingList = createSelector(
   shoppingListSlice,
-  (shoppingList) => shoppingList
+  (shoppingList) => {
+    const productsInShoppingList = shoppingList
+      .map(item => item.name)
+      .reduce((prev: string[], curr: string) => prev.includes(curr) ? prev : [ ...prev, curr ], []);
+
+    return productsInShoppingList.map(product => ({
+      name: product,
+      amount: shoppingList.filter(item => item.name === product).length
+    }));
+  }
 );
 
 export const addToShoppingListAction = createAction(
