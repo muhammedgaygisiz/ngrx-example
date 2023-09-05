@@ -4,6 +4,7 @@ import { ShoppingListComponent } from "./libs/shopping-list/shopping-list.compon
 import { ShoppingListItem } from "./libs/shopping-list/shopping-list.item";
 import { AsyncPipe } from "@angular/common";
 import { ShoppingListStoreService } from "./libs/store/shopping-list-store.service";
+import { Product } from "./libs/product-list/product";
 
 @Component({
   selector: 'app-root',
@@ -21,4 +22,8 @@ export class AppComponent {
   service = inject(ShoppingListStoreService);
 
   shoppingList: ShoppingListItem[] = [];
+
+  addProductToShoppingList(product: Product) {
+    this.service.addToShoppingList(product);
+  }
 }
