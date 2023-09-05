@@ -4,17 +4,21 @@ import { Product } from "../product-list/product";
 
 const shoppingListSlice = createFeatureSelector<ShoppingListItem[]>('shopping-list');
 
+const calculateShoppingList = (shoppingList: ShoppingListItem[]) => {
+  const productsInShoppingList = shoppingList
+    .map(item => item.name)
+    .reduce((prev: string[], curr: string) => prev.includes(curr) ? prev : [...prev, curr], []);
+
+  return productsInShoppingList.map(product => ({
+    name: product,
+    amount: shoppingList.filter(item => item.name === product).length
+  }));
+};
+
 export const shoppingList = createSelector(
   shoppingListSlice,
   (shoppingList) => {
-    const productsInShoppingList = shoppingList
-      .map(item => item.name)
-      .reduce((prev: string[], curr: string) => prev.includes(curr) ? prev : [ ...prev, curr ], []);
-
-    return productsInShoppingList.map(product => ({
-      name: product,
-      amount: shoppingList.filter(item => item.name === product).length
-    }));
+    return calculateShoppingList(shoppingList);
   }
 );
 
